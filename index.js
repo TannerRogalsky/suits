@@ -1,11 +1,11 @@
-var ctx = document.getElementById("canvas").getContext("2d"), faces = ['J', 'Q', 'K'];
+var ctx = document.getElementById("canvas").getContext("2d"), faces = ['J', 'Q', 'K'], index, z, y, x;
 ctx.font = '2px serif';
 ctx.lineWidth = 0.5;
 
 function normalizeData(data, x1, y1, x2, y2) {
-  for (i = 0; i < data.length;) {
-    data[i] = (data[i++] - x1) / (x2 - x1);
-    data[i] = (data[i++] - y1) / (y2 - y1);
+  for (index = 0; index < data.length;) {
+    data[index] = (data[index++] - x1) / (x2 - x1);
+    data[index] = (data[index++] - y1) / (y2 - y1);
   }
   return data;
 }
@@ -17,8 +17,8 @@ function drawWrapper(color, data) {
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.moveTo(data[0], data[1]);
-    for (i = 2; i < data.length;)
-      ctx.bezierCurveTo(data[i++], data[i++], data[i++], data[i++], data[i++], data[i++])
+    for (index = 2; index < data.length;)
+      ctx.bezierCurveTo(data[index++], data[index++], data[index++], data[index++], data[index++], data[index++])
     ctx.fill();
     ctx.restore();
   }
@@ -30,8 +30,8 @@ function drawCard(x, y, s, number, suitDrawer) {
   ctx.strokeRect(0, 0, 10, 14);
 
   if (number <= 10) {
-    for (j = 0; j < number;) {
-      suitDrawer(j++ % 2 * 3 + 2.5, 10 / number * j, 2);
+    for (z = 0; z < number;) {
+      suitDrawer(z++ % 2 * 3 + 2.5, 10 / number * z, 2);
     }
   } else {
     number = faces[number - 11];
@@ -59,8 +59,8 @@ var suits = [
   drawWrapper(null, normalizeData([493,1252,493,1213,459,1213,462,1241,459,1387,334,1460,242,1444,102,1416,58,1278,60,1197,63,944,318,759,547,437,714,728,990,957,1006,1181,1030,1481,649,1592,594,1244,592,1221,563,1207,566,1244,573,1338,560,1380,670,1613,670,1613,388,1613,388,1613,451,1504,488,1369,493,1252], 60, 437, 1006, 1613)),
   drawWrapper('red', normalizeData([330,404,490,394,573,530,589,638,599,655,605,650,608,637,616,499,740,386,854,401,1040,404,1153,611,1122,756,1076,971,967,1100,880,1233,781,1370,648,1569,605,1664,605,1664,470,1459,294,1217,176,1055,84,879,73,728,63,586,134,431,330,404], 73, 401, 1122, 1664))
 ];
-for (n = 0; n < 13;) {
-  x = n++ * 100;
-  for (s = 0; s < 4;)
-    drawCard(x, s * 140, 10, n, suits[s++]);
+for (y = 0; y < 13;) {
+  x = y++ * 100;
+  for (x = 0; x < 4;)
+    drawCard(x, x * 140, 10, y, suits[x++]);
 }
