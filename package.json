@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "minify": "uglifyjs index.js -o out.js --screw-ie8 -m toplevel=true",
-    "gzip": "gzip -f out.js",
+    "minify": "uglifyjs index.js -o out.js --screw-ie8 -m toplevel=true,sort=true",
+    "gzip": "gzip -f -k out.js",
     "build": "npm run minify && npm run gzip"
   },
   "author": "Tanner Rogalsky",
